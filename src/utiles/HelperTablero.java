@@ -3,14 +3,14 @@ package utiles;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
-import grafica.Tablero;
+import grafica.CampoBatalla;
 import rescate.Config;
 
 
 public class HelperTablero {
 	
 	
-	public static void controlTeclado(Tablero obj ,KeyEvent e,Config config){
+	public static void controlTeclado(CampoBatalla obj ,KeyEvent e,Config config){
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN){
 			config.setAbajo(true);

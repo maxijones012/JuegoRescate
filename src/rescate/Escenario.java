@@ -5,11 +5,13 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
-import grafica.JuegoUI;
+import grafica.CampoBatallaLogica;
 import grafica.PersonasRescatadas.PersonasRescatada;
+import interfaces.IEscenario;
+import utiles.HelperMovimiento;
 
 
-public class Escenario implements PersonasRescatada{
+public class Escenario implements PersonasRescatada, IEscenario{
 	private Config config;
 	private boolean bonusAleatorio;
 	private int bonusContador = 0;
@@ -23,23 +25,15 @@ public class Escenario implements PersonasRescatada{
 		this.elementos = new ArrayList<Elemento>();
 	}
 
-	/**
-	 * se queda en un bucle dando turnos a cada elemento para que implemente sus metodos
-	 */
 	public void iniciarJuego(){
 		crearElementos();
 		
 		//CREAMOS LA PARTE GRAFICA
-		JuegoUI vista = new JuegoUI(this); 
+		CampoBatallaLogica vista = new CampoBatallaLogica(this); 
 		
 		while(!finalizar){
 			if (!isPausa()){
-//				crearBonus();
-//				crearBonus();				
-//				crearBonus();
-//				crearBonus();
-//				crearBonus();
-//				crearBonus();				
+//				crearBonus();			
 //				crearBonus();
 				crearBonus();
 				 
@@ -110,13 +104,12 @@ public class Escenario implements PersonasRescatada{
 			Elemento e1 = this.elementos.get(i);
 			
 			//guaramos las coordenadas para verificar si choco contra el tablero
-			int coord1 = e1.getPosicion().getX();
-			int coord2 = e1.getPosicion().getY();
+			int coord1 = HelperMovimiento.obtenerPosicionX(e1);
+			int coord2 = HelperMovimiento.obtenerPosicionY(e1);
+
 			//Creamos el rectangulo
-			Rectangle r1 = new Rectangle(e1.getPosicion().getX(),
-										e1.getPosicion().getY(),
-										e1.getTamanio().getAncho(),
-										e1.getTamanio().getAlto());
+			Rectangle r1 = new Rectangle(e1.getPosicion().getX(),e1.getPosicion().getY(),
+										e1.getTamanio().getAncho(),e1.getTamanio().getAlto());
 			
 			for(int j=i+1; j<this.elementos.size(); j++){
 				
@@ -244,10 +237,6 @@ public class Escenario implements PersonasRescatada{
 	}
 
 	
-	/**
-	 * agrega un elemento a la lista de elementos del escenario
-	 * @param elementos
-	 */
 	public void addElemento(Elemento elemento) {
 		this.elementos.add(elemento);
 	}

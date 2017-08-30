@@ -12,20 +12,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import interfaces.JuegoListener;
 import rescate.Config;
 import rescate.Elemento;
 import rescate.Escenario;
 import rescate.Robot;
 
 
-public class JuegoUI extends JFrame implements JuegoListener{
+public class CampoBatallaLogica extends JFrame implements JuegoListener{
 	/**
 	 * Clase JuegoUI donde se genera la parte grafica del juego
 	 */
 	private static final long serialVersionUID = 1L;
 	private Config config = new Config();
-	private Tablero tableroJuego;
-	private TableroConsola tableroConsola;
+	private CampoBatalla campoBatalla;
 	private Escenario escenario;
 	
 	
@@ -33,38 +33,33 @@ public class JuegoUI extends JFrame implements JuegoListener{
 	 * Constructor de la clase JuegoUI en la que se setean las vistas en general
 	 * @param escenario
 	 */
-	public JuegoUI(Escenario escenario){
+	public CampoBatallaLogica(Escenario escenario){
 		this.escenario = escenario;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
-		tableroConsola = new TableroConsola();		
-		tableroJuego = new Tablero(escenario);					
+		new CampoDeBatallaConsola();		
+		campoBatalla = new CampoBatalla(escenario);
+		
 		Container panel = this.getContentPane(); //PANEL		
 		panel.setLayout(new BorderLayout());						
-//		panel.add(tableroConsola,  (BorderLayout.EAST));
 		
 		agregarMenu(panel);				
 		
-		panel.add(tableroJuego, null);		 
+		panel.add(campoBatalla, null);		 
 		this.setSize(config.getAnchoTablero(),config.getAltoTablero());			
 		this.setVisible(true);
 		
 		this.setVisible(true);
-		tableroJuego.inicializar();
+		campoBatalla.inicializar();
 	}
 
-
-
-
-	
-	
 	/**
 	 * dijuba nuevamente todos los elementos que se encuentran el GUI
 	 * @param escenario 
 	 */
 	@Override
 	public void actualizar(Escenario escenario) {
-		this.tableroJuego.actualizar();
-		addKeyListener(tableroJuego);		
+		this.campoBatalla.actualizar();
+		addKeyListener(campoBatalla);		
 	}
 	
 	
@@ -86,7 +81,7 @@ public class JuegoUI extends JFrame implements JuegoListener{
 					Elemento e1 = escenario.getElementos().get(i);
 					e1.getEscenario().setPausa(true);
 				}
-				JOptionPane.showMessageDialog(tableroJuego, "JUEGO PAUSADO");
+				JOptionPane.showMessageDialog(campoBatalla, "JUEGO PAUSADO");
 			}
 		});
 		
@@ -113,17 +108,10 @@ public class JuegoUI extends JFrame implements JuegoListener{
 	}
 
 
-
-
-
-
 	@Override
-	public void actualizar() {
-		
-	}
+	public void actualizar() {}
 
 
-	
 	
 	
  

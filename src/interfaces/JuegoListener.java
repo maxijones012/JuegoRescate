@@ -1,4 +1,4 @@
-package grafica;
+package interfaces;
 
 import rescate.Escenario;
 

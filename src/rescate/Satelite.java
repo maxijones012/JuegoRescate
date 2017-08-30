@@ -10,6 +10,7 @@ public class Satelite extends Elemento implements RadarListener{
 	private int cantidadMuniciones;
 	private Radar radar;
 	private Config config;
+	private Boolean radarOn=true;
 	private Escenario escenario;
 	
 
@@ -34,7 +35,8 @@ public class Satelite extends Elemento implements RadarListener{
 	public void jugar() {
 		this.getRadar().escanear();
 		if (this.getNivelEscudo()>=0){
-			this.getRadar().girar(10);
+			HelperSatelite.girarCorrector(this);
+//			this.getRadar().girar(10);
 			for(int i=0; i<this.getRadar().getElementosVistos().size(); i++){
 				Elemento e = this.getRadar().getElementosVistos().get(i);
 				if(e instanceof Robot){
@@ -122,4 +124,13 @@ public class Satelite extends Elemento implements RadarListener{
 		this.setNivelEscudo(this.getNivelEscudo()-municion.getDaño());
 		
 	}
+
+	public Boolean getRadarOn() {
+		return radarOn;
+	}
+
+	public void setRadarOn(Boolean radarOn) {
+		this.radarOn = radarOn;
+	}
+
 }

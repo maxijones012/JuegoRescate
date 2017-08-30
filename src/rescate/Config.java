@@ -1,6 +1,6 @@
 package rescate;
 
-public class Config {
+public class Config implements IConfiguracionRobot {
 	/*Tamaño de todos los elementos del juego*/
 	private int anchoTablero= 800;
 	private int altoTablero = 600;
@@ -10,7 +10,7 @@ public class Config {
 	//ROBOT
 	private int escudo=39;	
 	
-	private int anchoRobot = 40;
+	private static int anchoRobot = 40;
 	private int altoRobot = 40;
 	
 	private int anchoSatelite=50;
@@ -148,23 +148,13 @@ public class Config {
 		return this.anchoMunicion;
 	}
 
-	/**
-	 * Devuelve el alto de un Robot
-	 * 
-	 * @return Cantidad de pixels
-	 */
 
 	public int getAltoRobot() {
 		return this.altoRobot;
 	}
 
-	/**
-	 * Devuelve el ancho de un Robot
-	 * 
-	 * @return Cantidad de pixels
-	 */
 	public int getAnchoRobot() {
-		return this.anchoRobot;
+		return Config.anchoRobot;
 	}
 
 	/**
@@ -243,7 +233,7 @@ public class Config {
 	}
 
 	public void setAnchoRobot(int anchoRobot) {
-		this.anchoRobot = anchoRobot;
+		Config.anchoRobot = anchoRobot;
 	}
 
 	public void setAltoRobot(int altoRobot) {

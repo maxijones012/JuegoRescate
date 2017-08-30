@@ -1,0 +1,6 @@
+echo "# JuegoRescatev4.0" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/maxijones012/JuegoRescatev4.0.git
+git push -u origin master

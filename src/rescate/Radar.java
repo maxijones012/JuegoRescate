@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import interfaces.IRadar;
 import interfaces.RadarListener;
+import utiles.HelperMovimiento;
 
 
 
@@ -41,11 +42,12 @@ public class Radar implements RadarListener, IRadar{
 	 * @param angulo
 	 */
 	public void girar (int angulo){
-		int dirNueva = this.getDireccion() + angulo;
+		HelperMovimiento.girar(this, angulo);
+	/*	int dirNueva = this.getDireccion() + angulo;
 		while (dirNueva >= 360){
 			dirNueva = dirNueva - 360;
 		}
-		this.setDireccion(dirNueva);
+		this.setDireccion(dirNueva);*/
 	}
 	
 	

@@ -13,15 +13,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
+
+import interfaces.ICampoBatalla;
 import rescate.Config;
 import rescate.Elemento;
 import rescate.Escenario;
 import rescate.Movible;
 import rescate.Robot;
 import rescate.Satelite;
+import utiles.HelperCampoBatalla;
+import utiles.HelperMovimiento;
 import utiles.HelperTablero;
 
-public class Tablero extends Canvas implements KeyListener{
+public class CampoBatalla extends Canvas implements KeyListener, ICampoBatalla{
 	/**
 	 * 
 	 */
@@ -37,38 +41,27 @@ public class Tablero extends Canvas implements KeyListener{
 	
 	
 	//CONSTRUCTOR DE LA CLASE
-	public Tablero(Escenario escenario){
+	public CampoBatalla(Escenario escenario){
+		HelperCampoBatalla.inicializarCampo(this);
 		this.escenario = escenario;
 		this.config=escenario.getConfig();
-		this.setBackground(Color.BLACK);
-		this.setForeground(Color.RED);
-		this.setLocation(250,250);
 		posicionRobot = new Point();
 	}
 
 
-
-
-	/**
-	 * Actualiza el juego en cada pasada
-	 */
 	public void actualizar(){
 		limpiar();
  		dibujar(); 				
 	}
 
-	
-	
-	/**
-	 * Dibuja los elementos
-	 */
 	private void dibujar() {
 				
 		for (int i=0; i< escenario.getElementos().size(); i++){
 			//pinto cada elemento
-			Elemento e = escenario.getElementos().get(i);//creo un elemento manipulable			
-			int x = (int)e.getPosicion().getX();
-			int y = (int)e.getPosicion().getY();
+			Elemento e = escenario.getElementos().get(i);//creo un elemento manipulable	
+			int x = HelperMovimiento.obtenerPosicionX(e);
+			int y = HelperMovimiento.obtenerPosicionY(e);
+
 			
 			//busca el nombre de la clase con el nombre del archivo
 			BufferedImage eImagen =  getImagen(e.getClass().getName());
@@ -86,15 +79,14 @@ public class Tablero extends Canvas implements KeyListener{
 				Satelite satelite = (Satelite) e;
 				this.getG2D().drawPolygon(satelite.getRadar().getAreaCobertura());					
 			}
-			this.getG2D().drawImage(eImagen, x, y, e.getTamanio().getAncho(), e.getTamanio().getAlto(), null);//age(eImagen, x, y, null);				
+			this.getG2D().drawImage(eImagen, x, y, e.getTamanio().getAncho(), e.getTamanio().getAlto(), null);		
 		}
 		this.getBufferStrategy().show();
 	}
 
 
 
-	private Graphics2D getG2D(){
-		
+	private Graphics2D getG2D(){		
 		if (this.getBufferStrategy() == null)
 			return (Graphics2D) this.getGraphics();
 		else 
@@ -107,9 +99,7 @@ public class Tablero extends Canvas implements KeyListener{
 		actualizar();
 	}
 	
-	/**
-	 * Dibuja el fondo
-	 */
+	
 	private void limpiar(){
 		this.getG2D().drawImage(getImagen("fondo"), 0, 0, getWidth(), getHeight(), null);
 	}
@@ -221,6 +211,8 @@ public class Tablero extends Canvas implements KeyListener{
 
 		return new Dimension((int)(x1+x2), (int)(y1+y2));
 	}
+
+
 
 }
 
