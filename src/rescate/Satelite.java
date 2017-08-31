@@ -35,8 +35,7 @@ public class Satelite extends Elemento implements RadarListener{
 	public void jugar() {
 		this.getRadar().escanear();
 		if (this.getNivelEscudo()>=0){
-			HelperSatelite.girarCorrector(this);
-//			this.getRadar().girar(10);
+			HelperSatelite.girarCorrector(this, 180, 0);
 			for(int i=0; i<this.getRadar().getElementosVistos().size(); i++){
 				Elemento e = this.getRadar().getElementosVistos().get(i);
 				if(e instanceof Robot){

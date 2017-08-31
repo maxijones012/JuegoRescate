@@ -155,6 +155,8 @@ public class CampoBatalla extends Canvas implements KeyListener, ICampoBatalla{
 	}
 
 	
+	
+	
 	public void inicializar() {
 		
 		//this.setFocusable(true);

@@ -5,6 +5,7 @@ import rescate.Config;
 import rescate.Elemento;
 import rescate.Municion;
 import rescate.Robot;
+import rescate.Satelite;
 
 public abstract class HelperRobot {
 
@@ -17,6 +18,25 @@ public abstract class HelperRobot {
 			obj.setCantidadMunicion(obj.getCantidadMunicion()-1);	
 		}
 	}
+	
+	
+	public static void girarCorrector(Robot robot, int ini, int max,int velocidadGiro) {
+		
+		if (robot.getRadarOn()==true){
+			robot.getRadar().girar(velocidadGiro);
+			if (   robot.getRadar().getDireccion()>ini ){
+				robot.setRadarOn(false);
+			}
+			else
+				robot.setRadarOn(true);
+		}
+		else
+			robot.getRadar().girar(-velocidadGiro);
+		if (   robot.getRadar().getDireccion()<max ){
+			robot.setRadarOn(true);
+		}
+	}
+	
 	
 	
 	public static void lanzarBomba(Robot obj){

@@ -7,6 +7,7 @@ import utiles.HelperRobot;
 public abstract class Robot extends Movible implements RadarListener, IRobot{
 	private int nivelEscudo;
 	private int nivelEnergia;
+	private Boolean RadarOn=true;
 	private boolean llevaPersona = false;
 	private int cantidadMunicion;
 	private int cantidadBomba;
@@ -44,7 +45,7 @@ public abstract class Robot extends Movible implements RadarListener, IRobot{
 	@Override
 	public void jugar() {
 		//tengo escudo
-		if (this.nivelEscudo>=0){		
+		if (this.nivelEscudo>=0){					
 			this.getRadar().escanear();				
 		}
 		//sino se rompio escudo
@@ -283,6 +284,16 @@ public abstract class Robot extends Movible implements RadarListener, IRobot{
 	public void rescatar(Persona persona) {
 		this.llevaPersona= true;
 		this.personaCargada=persona;
+	}
+
+
+	public Boolean getRadarOn() {
+		return RadarOn;
+	}
+
+
+	public void setRadarOn(Boolean radarOn) {
+		RadarOn = radarOn;
 	}
 
 }

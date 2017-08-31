@@ -2,8 +2,8 @@ package rescate;
 
 public class Config implements IConfiguracionRobot {
 	/*Tamaño de todos los elementos del juego*/
-	private int anchoTablero= 800;
-	private int altoTablero = 600;
+	private int anchoTablero= 900;
+	private int altoTablero = 700;
 	
 	
 
